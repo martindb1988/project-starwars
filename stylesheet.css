@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+body{
+    font-family: 'Space Mono', monospace;
+    background: rgb(61,61,87);
+    color: rgb(255, 255, 255);
+    
+}
+
+.container{
+    display:grid;
+    grid-template-columns: 50px auto 50px;
+    grid-template-rows: 50px auto 50px
+}
+
+.section1{
+    background-color:rgb(31, 31, 44);
+    grid-row-start:2;
+    grid-column-start:2;
+    text-align: center;
+    padding: 10px;
+}

@@ -1,22 +1,23 @@
+const name = document.getElementById("name")
+const eyecolor = document.getElementById("eyecolor")
+const birthyear = document.getElementById("birthyear")
 
-// EventListener to pull data when button is clicked
-document.getElementById("refresh").addEventListener("click", randomize);
+const button = document.querySelector(".getRandomCharacter");
+button.addEventListener('click', (e) => {
+    e.preventDefault()
+        name.innerHTML = '<em> Loading... </em>'
+        eyecolor.innerHTML = '<em> Loading... </em>'
+        birthyear.innerHTML = '<em> Loading... </em>'
 
-// Function which randomizes a number between 1 and maxRecord and fetches the JSON data
-function randomize(){
+  const randomNumber = Math.ceil(Math.random() *83);
 
-    // Determination for which category to pull
-    let randomCat = Math.floor((Math.random() *5)+1)
-    let categories = ["people", "planets", "films", "species", "vehicles", "starships"];
-    let category =(`` +categories[randomCat]);
+    fetch(`https://swapi.dev/api/people/${randomNumber}`)
+      .then(response => response.json())
+      .then(character => {
+        name.innerHTML = character['name'];
+        eyecolor.innerHTML = character['eye_color'];
+        birthyear.innerHTML = character['birth_year'];
+  })
+    
+})
 
-    // Max records for each category
-    let maxRecords = [83,60,6,35,35,15];
-    let maxRecord = (+maxRecords[randomCat]);
-    let randomNumber = Math.floor((Math.random() *`${maxRecord}`)+1)
-
-    // Fetching data with the provided variables from the previous steps
-    fetch(`https://swapi.dev/api/${category}/${randomNumber}`)
-        .then(response => response.json())
-        .then(data => console.log(data));
-}
